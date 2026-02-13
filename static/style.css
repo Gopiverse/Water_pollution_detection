@@ -1,0 +1,94 @@
+/* Reset some defaults */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    color: #2c3e50;
+    text-align: center;
+}
+
+/* Header */
+h1 {
+    margin-top: 40px;
+    font-size: 2.8em;
+    color: #192a56;
+}
+
+/* Form styling */
+form {
+    background-color: #ffffff;
+    padding: 25px 35px;
+    margin: 30px auto;
+    border-radius: 15px;
+    max-width: 500px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+input[type="file"] {
+    margin-bottom: 15px;
+    padding: 10px;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background-color: #00a8ff;
+    color: white;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #0097e6;
+    transform: translateY(-2px);
+}
+
+/* Container for images */
+.image-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin: 30px auto;
+    max-width: 900px;
+}
+
+.image-card {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.image-card img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+/* Labels */
+h2 {
+    margin-top: 10px;
+    color: #40739e;
+}
+
+/* Responsive for smaller screens */
+@media screen and (max-width: 768px) {
+    .image-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
