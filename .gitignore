@@ -6,3 +6,4 @@ env/
 venv/
 static/uploads/
 .DS_Store
+dotenv
