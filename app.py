@@ -4,13 +4,15 @@ import base64
 import cv2
 import numpy as np
 from roboflow import Roboflow
+from dotenv import load_dotenv
+load_dotenv()
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 # Roboflow project info
-API_KEY = "xlDny4cY4rJsCZDNfOct"
+API_KEY = os.getenv("ROBOFLOW_API_KEY")
 PROJECT = "water-segmentation-n6ecd"
 VERSION = 1
 
