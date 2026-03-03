@@ -1,8 +1,29 @@
+# Byte-compiled / Python cache
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
-env/
+*.py[cod]
+*$py.class
+
+# Virtual environment
 venv/
+env/
+ENV/
+
+# Flask uploads
 static/uploads/
+*.sqlite3
+
+# dotenv
+.env
+
+# Logs
+*.log
+
+# PyCharm / VSCode
+.idea/
+.vscode/
+
+# macOS
 .DS_Store
+
+# Ignore model weights 
+best.pt

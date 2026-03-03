@@ -1,7 +1,8 @@
 flask
+ultralytics
+torch
+torchvision
 opencv-python
 numpy
-pillow
-requests
-matplotlib
-roboflow
+Pillow
+

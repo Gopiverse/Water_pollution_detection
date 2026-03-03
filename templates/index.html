@@ -1,28 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Water Segmentation</title>
+    <meta charset="UTF-8">
+    <title>Plastic Detection AI</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>Water Segmentation Demo</h1>
 
-        <form method="POST" enctype="multipart/form-data">
-            <input type="file" name="image" required>
-            <br>
-            <button type="submit">Upload & Segment</button>
-        </form>
+<div class="main-container">
 
-        {% if original_image %}
-            <h2>Uploaded Image</h2>
-            <img src="{{ original_image }}">
-        {% endif %}
+    <h1 class="title">WATER POLLUTION DETECTOR USING YOLOV8 OBJECT DETECTION</h1>
+    <p class="subtitle">Upload an image to detect plastic using AI</p>
 
-        {% if water_only_image %}
-            <h2>Water-only Segmented Image</h2>
-            <img src="data:image/png;base64,{{ water_only_image }}">
-        {% endif %}
+    {% if status_message %}
+    <div class="status-message">
+        {{ status_message }}
+        <br><br>
     </div>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+        <div class="upload-card">
+            <label for="fileInput" class="custom-file-upload">
+                Select Image
+            </label>
+            <input type="file" id="fileInput" name="file" onchange="this.form.submit()">
+        </div>
+    </form>
+
+
+    {% if original_img %}
+    <div class="image-container">
+
+        <div class="image-card">
+            <h3>Original Image</h3>
+            <img src="{{ original_img }}" alt="Original Image">
+        </div>
+
+        <div class="image-card">
+            <h3>Detection Output</h3>
+            <img src="{{ result_img }}" alt="Detection Image">
+        </div>
+
+    </div>
+    {% endif %}
+
+</div>
+
 </body>
 </html>
+
