@@ -1,16 +1,9 @@
-# Byte-compiled / Python cache
 __pycache__/
 *.py[cod]
 *$py.class
 
-# Virtual environment
-venv/
-env/
-ENV/
-
 # Flask uploads
 static/uploads/
-*.sqlite3
 
 # dotenv
 .env
@@ -25,5 +18,3 @@ static/uploads/
 # macOS
 .DS_Store
 
-# Ignore model weights 
-best.pt
