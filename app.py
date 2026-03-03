@@ -127,4 +127,6 @@ def send_email_notification(subject, message_body):
     print(response.text)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8040, debug=True)
+    import os
+    port = int(os.environ.get("PORT", 8040))
+    app.run(host="0.0.0.0", port=port)
