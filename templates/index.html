@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Plastic Detection AI</title>
+    <title>Water Pollution Detector</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -10,7 +10,7 @@
 <div class="main-container">
 
     <h1 class="title">WATER POLLUTION DETECTOR USING YOLOV8 OBJECT DETECTION</h1>
-    <p class="subtitle">Upload an image to detect plastic using AI</p>
+    <p class="subtitle">Upload an image to detect pollution</p>
 
     {% if status_message %}
     <div class="status-message">
@@ -29,21 +29,32 @@
     </form>
 
 
-    {% if original_img %}
+    
     <div class="image-container">
 
+        {% if original_img %}
         <div class="image-card">
             <h3>Original Image</h3>
             <img src="{{ original_img }}" alt="Original Image">
         </div>
+        {% endif %}
 
+        {% if plastic_img %}
         <div class="image-card">
-            <h3>Detection Output</h3>
-            <img src="{{ result_img }}" alt="Detection Image">
+            <h3>Plastic Detection Output</h3>
+            <img src="{{ plastic_img }}" alt="Detection Image">
         </div>
+        {% endif %}
+
+        {% if leaf_img %}
+        <div class="image-card">
+            <h3>Leaf Detection Output</h3>
+            <img src="{{ leaf_img }}" alt="Detection Image">
+        </div>
+        {% endif %}
 
     </div>
-    {% endif %}
+    
 
 </div>
 

@@ -37,7 +37,6 @@ body {
     margin-bottom: 30px;
 }
 
-/* Upload section */
 .upload-card {
     background: rgb(5, 2, 165);
     padding: 15px;
@@ -58,12 +57,10 @@ body {
     font-weight: 500;
 }
 
-/* Hide default file input */
 #fileInput {
     display: none;
 }
 
-/* Images section */
 .image-container {
     display: flex;
     justify-content: center;
