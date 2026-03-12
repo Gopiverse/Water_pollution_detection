@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Water Pollution Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+
+<h2>Water Pollution Monitoring Map</h2>
+<div id="map" style="height:500px;width:100%;"></div>
+
+<script>
+    // Initialize map
+    var map = L.map('map').setView([8.527, 76.938], 13);
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Fetch detections from Flask
+    fetch('/detections')
+        .then(response => response.json())
+        .then(detections => {
+            detections.forEach(function(d){
+                L.marker([d.lat, d.lng])
+                 .addTo(map)
+                 .bindPopup(
+                     "<b>Camera:</b> " + d.camera +
+                     "<br>Plastic: " + d.plastic_count +
+                     "<br>Leaf: " + d.leaf_count +
+                     "<br>Oil: " + d.oil_count
+                 );
+            });
+        });
+</script>
+
+</body>
+</html>
