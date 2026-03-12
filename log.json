@@ -4,7 +4,12 @@
         "plastic_count": 1
     },
     {
-        "timestamp": "2026-03-03 20:53:09",
-        "plastic_count": 2
+        "timestamp": "2026-03-12 15:26:17",
+        "plastic_count": 4,
+        "leaf_count": 1,
+        "oil_count": 0,
+        "camera": "static",
+        "lat": 0,
+        "lng": 0
     }
 ]

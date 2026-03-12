@@ -1,52 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Plastic Detection AI</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
-
 <div class="main-container">
 
-    <h1 class="title">WATER POLLUTION DETECTOR USING YOLOV8 OBJECT DETECTION</h1>
-    <p class="subtitle">Upload an image to detect plastic using AI</p>
-
-    {% if status_message %}
-    <div class="status-message">
-        {{ status_message }}
-        <br><br>
+    <!-- Left side image -->
+    <div class="left-image">
+        <img src="{{ url_for('static', filename='—Pngtree—modern world water day background_14746370.png') }}" alt="Water Side Image">
     </div>
-    {% endif %}
 
-    <form method="POST" enctype="multipart/form-data">
-        <div class="upload-card">
-            <label for="fileInput" class="custom-file-upload">
-                Select Image
-            </label>
-            <input type="file" id="fileInput" name="file" onchange="this.form.submit()">
+    <!-- Right side content -->
+    <div class="right-content" style="padding-top: 20%;">
+        <h1 class="title" style="font-size: 40px;">WATER POLLUTION DETECTOR</h1>
+        <p class="subtitle">Upload an image to detect pollution</p>
+
+        {% if status_message %}
+        <div class="status-message">
+            {{ status_message }}
         </div>
-    </form>
+        {% endif %}
 
+        <form method="POST" enctype="multipart/form-data">
+            <div class="upload-card">
+                <label for="fileInput" class="custom-file-upload">
+                    Select Image
+                </label>
+                <input type="file" id="fileInput" name="file" onchange="this.form.submit()">
+            </div>
+        </form>
 
-    {% if original_img %}
-    <div class="image-container">
+        <div class="image-container">
+            {% if original_img %}
+            <div class="image-card">
+                <h3>Original Image</h3>
+                <img src="{{ original_img }}" alt="Original Image">
+            </div>
+            {% endif %}
 
-        <div class="image-card">
-            <h3>Original Image</h3>
-            <img src="{{ original_img }}" alt="Original Image">
-        </div>
+            {% if plastic_img %}
+            <div class="image-card">
+                <h3>Plastic Detection Output</h3>
+                <img src="{{ plastic_img }}" alt="Detection Image">
+            </div>
+            {% endif %}
 
-        <div class="image-card">
-            <h3>Detection Output</h3>
-            <img src="{{ result_img }}" alt="Detection Image">
+            {% if leaf_img %}
+            <div class="image-card">
+                <h3>Leaf Detection Output</h3>
+                <img src="{{ leaf_img }}" alt="Detection Image">
+            </div>
+            {% endif %}
+
+            {% if oil_img %}
+            <div class="image-card">
+                <h3>Oil Detection Output</h3>
+                <img src="{{ oil_img }}" alt="Detection Image">
+            </div>
+            {% endif %}
         </div>
 
     </div>
-    {% endif %}
 
 </div>
-
-</body>
-</html>
-
