@@ -1,128 +1,161 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-/* Reset and basic styles */
+/* Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Body */
 body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(rgb(160, 233, 234), rgb(112, 220, 237));
-    margin: 0;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
-/* Main container: two columns */
+/* Main Layout */
 .main-container {
     display: flex;
     width: 100%;
-    min-height: 100vh; /* full viewport height */
+    align-items: stretch;
+    min-height: 100vh;
 }
 
-/* Left image column */
+/* LEFT SIDE IMAGE */
 .left-image {
-    flex: 1; /* left half */
+    flex: 1;
+    display: flex;
 }
 
 .left-image img {
     width: 100%;
-    height: 100vh;   /* full viewport height */
-    object-fit: cover; /* crop if needed */
+    height: 100%;
+    min-height: 100vh;
+    object-fit: cover;
 }
 
-/* Right content column */
+.left-image img {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+}
+
+/* RIGHT SIDE CONTENT */
 .right-content {
-    flex: 1; /* right half */
-    padding: 60px;
+    flex: 1;
+    padding: 40px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    align-items: center;
 }
 
-/* Titles */
+/* TITLE */
 .title {
     color: #021833;
-    font-size: 2.5rem;
-    font-weight: 600;
+    font-size: 2.8rem;
+    font-weight: 700;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .subtitle {
-    font-size: 1rem;
-    opacity: 0.8;
+    font-size: 1.1rem;
+    color: #0a2342;
     margin-bottom: 30px;
+    text-align: center;
 }
 
-/* Upload section */
+/* UPLOAD BUTTON */
 .upload-card {
     background: rgb(5, 2, 165);
-    padding: 15px;
+    padding: 15px 25px;
     border-radius: 15px;
-    width: 160px;
-    margin: auto;
     color: white;
     cursor: pointer;
-    margin-bottom: 40px;
     text-align: center;
+    transition: 0.3s ease;
+    margin-bottom: 40px;
 }
 
 .upload-card:hover {
     background: rgb(70, 68, 200);
+    transform: scale(1.05);
 }
 
 .custom-file-upload {
     cursor: pointer;
     font-weight: 500;
+    font-size: 1rem;
 }
 
-/* Hide default file input */
+/* HIDE INPUT */
 #fileInput {
     display: none;
 }
 
-/* Images section */
+/* IMAGE SECTION */
 .image-container {
     display: flex;
-    justify-content: center;
-    gap: 40px;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 25px;
+    width: 100%;
 }
 
+/* IMAGE CARD */
 .image-card {
     background: rgb(5, 2, 165);
     padding: 20px;
-    border-radius: 15px;
-    width: 450px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    width: 280px;
+    min-height: 360px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
     transition: 0.3s ease;
+    text-align: center;
 }
 
 .image-card:hover {
     transform: translateY(-8px);
 }
 
+/* CARD TITLE */
 .image-card h3 {
     color: white;
     margin-bottom: 15px;
+    font-size: 1.1rem;
 }
 
+/* IMAGE STYLE */
 .image-card img {
     width: 100%;
-    border-radius: 10px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 3px solid white;
 }
 
-/* Status message */
+/* STATUS MESSAGE */
 .status-message {
-    padding: 10px;
-    border-radius: 10px;
-    font-weight: bold;
+    background: rgba(255, 255, 255, 0.7);
+    color: #021833;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-weight: 600;
     margin-bottom: 20px;
+    text-align: center;
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+    .image-card {
+        width: 250px;
+    }
+}
+
+@media (max-width: 992px) {
     .main-container {
         flex-direction: column;
     }
@@ -132,10 +165,25 @@ body {
     }
 
     .right-content {
-        padding: 20px;
+        padding: 30px 20px;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .image-container {
+        flex-direction: column;
+        align-items: center;
     }
 
     .image-card {
-        width: 100%;
+        width: 90%;
+    }
+
+    .title {
+        font-size: 1.8rem;
     }
 }

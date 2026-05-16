@@ -14,11 +14,7 @@ import base64
 import cv2
 import numpy as np
 
-# Add this at the top after imports
-CAMERA_COORDS = {
-    "WEB_CAM_1": {"lat": 8.5241, "lng": 76.9366},
-    "WEB_CAM_2": {"lat": 8.5300, "lng": 76.9400}
-}
+
 
 
 
@@ -34,18 +30,9 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs("static", exist_ok=True)
 
 
-# Load trained YOLO model
 plastic_model = YOLO("best_plastic.pt")
 leaf_model = YOLO("best_leaf.pt")
-oil_model = YOLO("best_oil.pt")
-segmentation_model = YOLO("best_seg.pt")
-
-
-# Roboflow water segmentation model
-# rf = Roboflow(api_key="API_KEY")
-# project = rf.workspace().project("water-segmentation-n6ecd")
-# segmentation_model = project.version(1).model
-
+oil_model = YOLO("best.pt")
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -56,26 +43,16 @@ def index():
     leaf_img = None
     status_message = None
     oil_img = None
-    segmented_img = None
 
     if request.method == "POST":
         file = request.files.get("file")
 
         if file:
-            # Save uploaded image
             filepath = os.path.join(UPLOAD_FOLDER, file.filename)
             file.save(filepath)
             original_img = f"/{filepath}"
 
-            # CAMERA
-            camera_id = os.path.basename(os.path.dirname(os.path.dirname(filepath)))
-            CAMERA_COORDS = {
-                "WEB_CAM_1": {"lat": 8.5241, "lng": 76.9366},  # Lake 1
-                "WEB_CAM_2": {"lat": 8.5300, "lng": 76.9400}   # Lake 2
-            }
-            coords = CAMERA_COORDS.get(camera_id, {"lat": 0, "lng": 0})
 
-            # run YOLO model
             plastic_results = plastic_model.predict(filepath, conf=0.20)
             plastic_filename = f"plastic_{int(time.time()*1000)}.jpg"
             plastic_path = os.path.join("static", plastic_filename)
@@ -83,7 +60,7 @@ def index():
             plastic_img = url_for('static', filename=plastic_filename)
 
 
-            leaf_results = leaf_model.predict(filepath, conf=0.0127)
+            leaf_results = leaf_model.predict(filepath)
             leaf_filename = f"leaf_{int(time.time()*1000)}.jpg"
             leaf_path = os.path.join("static", leaf_filename)
             leaf_results[0].save(leaf_path)
@@ -91,15 +68,14 @@ def index():
 
            
 
-            oil_results = oil_model.predict(filepath, conf=0.028)
+            oil_results = oil_model.predict(filepath, conf=0.09)
             oil_filename = f"oil_{int(time.time()*1000)}.jpg"
             oil_path = os.path.join("static", oil_filename)
             oil_results[0].save(oil_path)
             oil_img = url_for('static', filename=oil_filename)
 
 
-
-            # Count detections of plastic and leaf
+            #count plastic, leaf and oil detections
             plastic_count = len(plastic_results[0].boxes)
             leaf_count = len(leaf_results[0].boxes)
             oil_count = len(oil_results[0].boxes)
@@ -107,9 +83,7 @@ def index():
            
             status_message = log_and_compare(
                     plastic_count, leaf_count, oil_count,
-                    camera_id=camera_id,
-                    lat=coords["lat"],
-                    lng=coords["lng"]
+                    
                 )
             print(status_message)
             print("Plastic saved:", plastic_path)
@@ -120,8 +94,7 @@ def index():
         "index.html",
         original_img=original_img,
         plastic_img=plastic_img,
-        leaf_img=leaf_img,
-        segmented_img=segmented_img,
+        #leaf_img=leaf_img,
         oil_img=oil_img,
         status_message=status_message
     )
@@ -142,40 +115,10 @@ def get_detections():
     return jsonify(data)
 
 
-@app.route("/map")
-def show_map():
-    return render_template("map.html")
-
-
-def extract_water_region(image_path):
-
-    import cv2
-    import numpy as np
-
-    results = segmentation_model(image_path)
-
-    img = cv2.imread(image_path)
-
-    if results[0].masks is None:
-        return img
-
-    polygons = results[0].masks.xy
-
-    mask = np.zeros(img.shape[:2], dtype=np.uint8)
-
-    for poly in polygons:
-        poly = np.array(poly, dtype=np.int32)
-        cv2.fillPoly(mask, [poly], 255)
-
-    output = img.copy()
-    output[mask == 0] = [255,255,255]
-
-    return output
 
 
 
-
-def log_and_compare(plastic_count, leaf_count, oil_count, camera_id="UNKNOWN", lat=0, lng=0):
+def log_and_compare(plastic_count, leaf_count, oil_count):
     log_file = "log.json"
 
     if not os.path.exists(log_file):
@@ -208,15 +151,11 @@ def log_and_compare(plastic_count, leaf_count, oil_count, camera_id="UNKNOWN", l
     else:
         message = f"First detection recorded. Count: {plastic_count}"
 
-    # Save new entry
     entry = {
         "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "plastic_count": plastic_count,
         "leaf_count": leaf_count,
-        "oil_count": oil_count,
-        "camera": camera_id,
-        "lat": lat,
-        "lng": lng
+        "oil_count": oil_count
     }
 
     data.append(entry)
@@ -225,7 +164,6 @@ def log_and_compare(plastic_count, leaf_count, oil_count, camera_id="UNKNOWN", l
         json.dump(data, f, indent=4)
 
     return message
-
 
 
 

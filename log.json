@@ -1,15 +1,50 @@
 [
     {
-        "timestamp": "2026-03-03 16:43:54",
-        "plastic_count": 1
+        "timestamp": "2026-05-11 16:52:05",
+        "plastic_count": 0,
+        "leaf_count": 0,
+        "oil_count": 1
     },
     {
-        "timestamp": "2026-03-12 15:26:17",
+        "timestamp": "2026-05-11 16:52:17",
+        "plastic_count": 0,
+        "leaf_count": 0,
+        "oil_count": 2
+    },
+    {
+        "timestamp": "2026-05-11 16:52:26",
+        "plastic_count": 0,
+        "leaf_count": 0,
+        "oil_count": 1
+    },
+    {
+        "timestamp": "2026-05-11 16:53:49",
+        "plastic_count": 0,
+        "leaf_count": 0,
+        "oil_count": 1
+    },
+    {
+        "timestamp": "2026-05-11 16:53:59",
         "plastic_count": 4,
-        "leaf_count": 1,
-        "oil_count": 0,
-        "camera": "static",
-        "lat": 0,
-        "lng": 0
+        "leaf_count": 0,
+        "oil_count": 1
+    },
+    {
+        "timestamp": "2026-05-11 16:54:29",
+        "plastic_count": 0,
+        "leaf_count": 0,
+        "oil_count": 1
+    },
+    {
+        "timestamp": "2026-05-11 16:54:47",
+        "plastic_count": 0,
+        "leaf_count": 0,
+        "oil_count": 1
+    },
+    {
+        "timestamp": "2026-05-11 16:55:34",
+        "plastic_count": 4,
+        "leaf_count": 0,
+        "oil_count": 1
     }
 ]
