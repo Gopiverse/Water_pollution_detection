@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
 from ultralytics import YOLO
 import os
 import glob
@@ -7,13 +7,10 @@ import json
 import requests
 from datetime import datetime
 from dotenv import load_dotenv
-load_dotenv()
-from flask import url_for
-# from roboflow import Roboflow
 import base64
 import cv2
-import numpy as np
-import base64
+
+load_dotenv()
 
 
 APPSCRIPT_URL = os.getenv("APPSCRIPT_URL")
