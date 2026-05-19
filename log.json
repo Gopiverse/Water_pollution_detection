@@ -6,45 +6,345 @@
         "oil_count": 1
     },
     {
-        "timestamp": "2026-05-11 16:52:17",
+        "timestamp": "2026-05-16 20:57:43",
         "plastic_count": 0,
         "leaf_count": 0,
         "oil_count": 2
     },
     {
-        "timestamp": "2026-05-11 16:52:26",
-        "plastic_count": 0,
+        "timestamp": "2026-05-16 20:58:06",
+        "plastic_count": 5,
         "leaf_count": 0,
         "oil_count": 1
     },
     {
-        "timestamp": "2026-05-11 16:53:49",
+        "timestamp": "2026-05-16 23:25:04",
         "plastic_count": 0,
         "leaf_count": 0,
-        "oil_count": 1
+        "oil_count": 2
     },
     {
-        "timestamp": "2026-05-11 16:53:59",
+        "timestamp": "2026-05-16 23:48:49",
+        "plastic_count": 5,
+        "leaf_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-16 23:49:21",
+        "plastic_count": 5,
+        "leaf_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-16 23:50:33",
+        "plastic_count": 5,
+        "leaf_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-16 23:51:20",
         "plastic_count": 4,
         "leaf_count": 0,
-        "oil_count": 1
+        "oil_count": 0
     },
     {
-        "timestamp": "2026-05-11 16:54:29",
+        "timestamp": "2026-05-17 01:44:05",
         "plastic_count": 0,
         "leaf_count": 0,
-        "oil_count": 1
+        "oil_count": 0
     },
     {
-        "timestamp": "2026-05-11 16:54:47",
+        "timestamp": "2026-05-17 01:44:14",
         "plastic_count": 0,
         "leaf_count": 0,
-        "oil_count": 1
+        "oil_count": 0
     },
     {
-        "timestamp": "2026-05-11 16:55:34",
+        "timestamp": "2026-05-17 01:44:22",
+        "plastic_count": 0,
+        "leaf_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 01:44:34",
+        "plastic_count": 3,
+        "leaf_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 01:44:47",
+        "plastic_count": 0,
+        "leaf_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:00:15",
+        "plastic_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:00:25",
+        "plastic_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:00:33",
+        "plastic_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:00:45",
+        "plastic_count": 3,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:00:57",
+        "plastic_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:11:05",
+        "plastic_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:11:14",
+        "plastic_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:11:22",
+        "plastic_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:11:35",
+        "plastic_count": 3,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:11:47",
+        "plastic_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:14:49",
+        "plastic_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:14:57",
+        "plastic_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:15:05",
+        "plastic_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:16:29",
+        "plastic_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:16:37",
+        "plastic_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:16:46",
+        "plastic_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:16:59",
+        "plastic_count": 3,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:17:12",
+        "plastic_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:24:42",
+        "plastic_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:24:50",
+        "plastic_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:26:21",
+        "plastic_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:26:32",
+        "plastic_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:26:40",
+        "plastic_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:26:51",
+        "plastic_count": 3,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:27:05",
+        "plastic_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:35:19",
+        "plastic_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:35:29",
+        "plastic_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:35:40",
+        "plastic_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:35:53",
+        "plastic_count": 2,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:36:05",
+        "plastic_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:38:36",
+        "plastic_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 09:39:01",
         "plastic_count": 4,
-        "leaf_count": 0,
+        "oil_count": 0
+    },
+    {
+        "timestamp": "2026-05-17 10:04:21",
+        "plastic_count": 4,
         "oil_count": 1
+    },
+    {
+        "timestamp": "2026-05-17 10:04:48",
+        "plastic_count": 0,
+        "oil_count": 1
+    },
+    {
+        "timestamp": "2026-05-17 10:05:14",
+        "plastic_count": 0,
+        "oil_count": 2
+    },
+    {
+        "timestamp": "2026-05-17 10:05:43",
+        "plastic_count": 0,
+        "oil_count": 1
+    },
+    {
+        "timestamp": "2026-05-17 10:05:54",
+        "plastic_count": 1,
+        "oil_count": 3
+    },
+    {
+        "timestamp": "2026-05-17 10:06:30",
+        "plastic_count": 4,
+        "oil_count": 1
+    },
+    {
+        "timestamp": "2026-05-17 10:06:44",
+        "plastic_count": 0,
+        "oil_count": 1
+    },
+    {
+        "timestamp": "2026-05-17 10:14:19",
+        "plastic_count": 1,
+        "oil_count": 3
+    },
+    {
+        "timestamp": "2026-05-17 10:18:04",
+        "plastic_count": 0,
+        "oil_count": 2
+    },
+    {
+        "timestamp": "2026-05-17 10:25:18",
+        "plastic_count": 1,
+        "oil_count": 3
+    },
+    {
+        "timestamp": "2026-05-17 10:28:03",
+        "plastic_count": 1,
+        "oil_count": 3
+    },
+    {
+        "timestamp": "2026-05-17 10:28:21",
+        "plastic_count": 0,
+        "oil_count": 1
+    },
+    {
+        "timestamp": "2026-05-17 10:36:34",
+        "plastic_count": 0,
+        "oil_count": 1
+    },
+    {
+        "timestamp": "2026-05-17 10:37:10",
+        "plastic_count": 1,
+        "oil_count": 3
+    },
+    {
+        "timestamp": "2026-05-17 11:10:09",
+        "plastic_count": 0,
+        "oil_count": 1
+    },
+    {
+        "timestamp": "2026-05-17 11:10:18",
+        "plastic_count": 0,
+        "oil_count": 1
+    },
+    {
+        "timestamp": "2026-05-17 11:10:26",
+        "plastic_count": 0,
+        "oil_count": 2
+    },
+    {
+        "timestamp": "2026-05-17 11:10:39",
+        "plastic_count": 2,
+        "oil_count": 1
+    },
+    {
+        "timestamp": "2026-05-17 11:10:56",
+        "plastic_count": 0,
+        "oil_count": 1
+    },
+    {
+        "timestamp": "2026-05-17 11:15:39",
+        "plastic_count": 3,
+        "oil_count": 1
+    },
+    {
+        "timestamp": "2026-05-17 11:20:47",
+        "plastic_count": 0,
+        "oil_count": 1
+    },
+    {
+        "timestamp": "2026-05-17 11:21:45",
+        "plastic_count": 0,
+        "oil_count": 2
     }
 ]

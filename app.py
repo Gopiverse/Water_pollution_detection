@@ -13,15 +13,15 @@ from flask import url_for
 import base64
 import cv2
 import numpy as np
-
-
-
+import base64
 
 
 APPSCRIPT_URL = os.getenv("APPSCRIPT_URL")
 RECEIVER_EMAIL = os.getenv("RECEIVER_EMAIL")
 SUBJECT_PREFIX = os.getenv("SUBJECT_PREFIX")
 API_KEY = os.getenv("API_KEY")
+
+print(RECEIVER_EMAIL)
 
 app = Flask(__name__)
 UPLOAD_FOLDER = "static/uploads"
@@ -31,7 +31,7 @@ os.makedirs("static", exist_ok=True)
 
 
 plastic_model = YOLO("best_plastic.pt")
-leaf_model = YOLO("best_leaf.pt")
+# leaf_model = YOLO("best_leaf.pt")
 oil_model = YOLO("best.pt")
 
 
@@ -40,7 +40,7 @@ def index():
     clean_up_static_folder()
     original_img = None
     plastic_img = None
-    leaf_img = None
+    # leaf_img = None
     status_message = None
     oil_img = None
 
@@ -60,11 +60,11 @@ def index():
             plastic_img = url_for('static', filename=plastic_filename)
 
 
-            leaf_results = leaf_model.predict(filepath)
-            leaf_filename = f"leaf_{int(time.time()*1000)}.jpg"
-            leaf_path = os.path.join("static", leaf_filename)
-            leaf_results[0].save(leaf_path)
-            leaf_img = url_for('static', filename=leaf_filename)
+            # leaf_results = leaf_model.predict(filepath)
+            # leaf_filename = f"leaf_{int(time.time()*1000)}.jpg"
+            # leaf_path = os.path.join("static", leaf_filename)
+            # leaf_results[0].save(leaf_path)
+            # leaf_img = url_for('static', filename=leaf_filename)
 
            
 
@@ -75,19 +75,19 @@ def index():
             oil_img = url_for('static', filename=oil_filename)
 
 
-            #count plastic, leaf and oil detections
+            #count plastic and oil detections
             plastic_count = len(plastic_results[0].boxes)
-            leaf_count = len(leaf_results[0].boxes)
+            # leaf_count = len(leaf_results[0].boxes)
             oil_count = len(oil_results[0].boxes)
 
            
             status_message = log_and_compare(
-                    plastic_count, leaf_count, oil_count,
+                    plastic_count, oil_count, filepath
                     
                 )
             print(status_message)
             print("Plastic saved:", plastic_path)
-            print("Leaf saved:", leaf_path)
+            # print("Leaf saved:", leaf_path)
 
 
     return render_template(
@@ -101,24 +101,7 @@ def index():
 
 
 
-import json
-from flask import jsonify
-
-@app.route("/detections")
-def get_detections():
-    log_file = "log.json"
-    if os.path.exists(log_file):
-        with open(log_file, "r") as f:
-            data = json.load(f)
-    else:
-        data = []
-    return jsonify(data)
-
-
-
-
-
-def log_and_compare(plastic_count, leaf_count, oil_count):
+def log_and_compare(plastic_count, oil_count, image_path):
     log_file = "log.json"
 
     if not os.path.exists(log_file):
@@ -137,7 +120,8 @@ def log_and_compare(plastic_count, leaf_count, oil_count):
                 message = f"⚠ Plastic count increased! Previous : {previous_count}, Now: {plastic_count} \n ⚠ Oil spills detected !! "
             else:
                 message = f"⚠ Plastic count increased! Previous: {previous_count}, Now: {plastic_count}"
-            send_email_notification("Alert !!", message)
+            if image_path:
+                send_email_notification(image_path, "Alert !!", message)
             
             # print("Email sent successfully")
 
@@ -145,7 +129,7 @@ def log_and_compare(plastic_count, leaf_count, oil_count):
             if(oil_count):
                 message = f"⚠ Oil spills detected! \n Plastic count decreased! Previous : {previous_count}, Now: {plastic_count} "
             message = f" Plastic count decreased! Previous: {previous_count}, Now: {plastic_count}"
-            send_email_notification("Alert : ", message)
+            send_email_notification(image_path, "Alert : ", message)
             # print("Email sent successfully")
 
     else:
@@ -154,7 +138,6 @@ def log_and_compare(plastic_count, leaf_count, oil_count):
     entry = {
         "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "plastic_count": plastic_count,
-        "leaf_count": leaf_count,
         "oil_count": oil_count
     }
 
@@ -166,30 +149,129 @@ def log_and_compare(plastic_count, leaf_count, oil_count):
     return message
 
 
+@app.route("/start_processing")
+def start_processing():
+
+    video_path = "static/sample_video.mp4"
+    cap = cv2.VideoCapture(video_path)
+
+    fps = cap.get(cv2.CAP_PROP_FPS)
+    if fps==0:
+        fps = 30
+
+    # 40 seconds interval
+    frame_interval = int(fps * 40)
+
+    frame_count = 0
+    results = []
+
+    while True:
+        ret, frame = cap.read()
+
+        if not ret:
+            break
+
+        if frame_count % frame_interval == 0:
+            frame = cv2.resize(frame, (640, 360))
+            frame_path = f"static/frame_{int(time.time())}.jpg"
+            cv2.imwrite(frame_path, frame, [cv2.IMWRITE_JPEG_QUALITY, 50])
+
+            plastic_results = plastic_model.predict(frame_path, conf=0.20)
+            oil_results = oil_model.predict(frame_path, conf=0.09)
+
+            plastic_count = len(plastic_results[0].boxes)
+            oil_count = len(oil_results[0].boxes)
+
+            msg = log_and_compare(plastic_count, oil_count, frame_path)
+
+            results.append(msg)
+
+        frame_count += 1
+
+    cap.release()
+
+    return {"status": "completed", "results": results}
 
 
-def send_email_notification(subject, message_body):
+
+
+def send_email_notification(image_path, subject, message_body):
+    with open(image_path, "rb") as img:
+        encoded = base64.b64encode(img.read()).decode("utf-8")
+    print(RECEIVER_EMAIL)
+    print("BASE64 SIZE", len(encoded))
+    if(len(encoded) > 800000):
+        print("Img size too large !!!")
+
+
+    email_list = [email.strip() for email in RECEIVER_EMAIL.split(",")]
     data = {
-        'to': RECEIVER_EMAIL,
+        'to':  email_list,
         'subject': f"{SUBJECT_PREFIX} - {subject}",
+        'image': encoded,
+        'filename': "frame.jpg",
         'body': message_body
     }
     response = requests.post(
         APPSCRIPT_URL,
-        data=data,
-        headers={"Content-Type": "application/x-www-form-urlencoded"}
+        json=data,
+        headers={"Content-Type": "application/json"}
     )
-    print(response.text)
+    print("Sent alert !",response.text)
+
+
+@app.route("/get_health")
+def get_health():
+    return {"health": get_river_health()}
+
+def get_river_health():
+
+    if not os.path.exists("log.json"):
+        return "No Data"
+
+    with open("log.json", "r") as f:
+        data = json.load(f)
+
+    if not data:
+        return "No Data"
+
+    recent = data[-10:]  # last 10 readings
+
+    total_score = 0
+
+    for entry in recent:
+        plastic = entry["plastic_count"]
+        oil = entry["oil_count"]
+        score = plastic + (oil * 5)
+        total_score += score
+
+    avg_score = total_score / len(recent)
+
+    if avg_score < 2:
+        return "GOOD ✅"
+    elif avg_score < 5:
+        return "MODERATE ⚠️"
+    elif avg_score < 10:
+        return "POOR 🔴"
+    else:
+        return "CRITICAL 🚨"
+
+
+
+
+
+
+
+
 
 
 def clean_up_static_folder():
     for file in glob.glob("static/plastic_*") + \
-            glob.glob("static/leaf_*") + \
             glob.glob("static/oil_*") + \
             glob.glob("static/seg_water_*"):
                 os.remove(file)
 
 if __name__ == "__main__":
     import os
-    port = int(os.environ.get("PORT", 8040))
-    app.run(host="0.0.0.0", port=port)
+    port = int(os.environ.get("PORT", 8000))
+    app.run(host="0.0.0.0", port=port, debug=True)

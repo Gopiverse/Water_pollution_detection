@@ -1,63 +1,103 @@
+<!DOCTYPE html>
+<html>
 <head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<title>Water Pollution Detector</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<div class="main-container">
+<body>
 
-    <!-- Left side image -->
-    <div class="left-image">
-        <img src="{{ url_for('static', filename='—Pngtree—modern world water day background_14746370.png') }}" alt="Water Side Image">
+<section class="hero">
+  <div class="overlay">
+    <p class="hero-tag">AI-Based Smart Monitoring</p>
+    <h1 class="hero-title">WATER POLLUTION DETECTOR</h1>
+    <p class="hero-subtitle">Detect. Analyze. Protect.</p>
+  </div>
+</section>
+
+<section class="options-section">
+  <h2>Select Mode</h2>
+  <div class="options-container">
+
+    <div class="option-card">
+      <div class="card-icon">▶</div>
+      <h3>Live Stream</h3>
+      <p>Run AI detection on video</p>
+      <button class="btn" onclick="startProcessing()">Start Analysis</button>
+      <p id="status" class="status-msg"></p>
     </div>
 
-    <!-- Right side content -->
-    <div class="right-content">
-        <h1 class="title">WATER POLLUTION DETECTOR</h1>
-        <p class="subtitle">Upload an image to detect pollution</p>
-
-        {% if status_message %}
-        <div class="status-message">
-            {{ status_message }}
-        </div>
-        {% endif %}
-
-        <form method="POST" enctype="multipart/form-data">
-            <div class="upload-card">
-                <label for="fileInput" class="custom-file-upload">
-                    Select Image
-                </label>
-                <input type="file" id="fileInput" name="file" onchange="this.form.submit()">
-            </div>
-        </form>
-
-        <div class="image-container">
-            {% if original_img %}
-            <div class="image-card">
-                <h3>Original Image</h3>
-                <img src="{{ original_img }}" alt="Original Image">
-            </div>
-            {% endif %}
-
-            {% if plastic_img %}
-            <div class="image-card">
-                <h3>Plastic Detection Output</h3>
-                <img src="{{ plastic_img }}" alt="Detection Image">
-            </div>
-            {% endif %}
-
-            {% if oil_img %}
-            <div class="image-card">
-                <h3>Oil Detection Output</h3>
-                <img src="{{ oil_img }}" alt="Detection Image">
-            </div>
-            {% endif %}
-
-            {% if leaf_img %}
-            <div class="image-card">
-                <h3>Leaf Detection Output</h3>
-                <img src="{{ leaf_img }}" alt="Detection Image">
-            </div>
-            {% endif %}
-        </div>
-
+    <div class="option-card">
+      <div class="card-icon">⬆</div>
+      <h3>Upload Image</h3>
+      <p>Analyze pollution using an uploaded image</p>
+      <form method="POST" enctype="multipart/form-data">
+        <label class="btn">
+          Select Image
+          <input type="file" name="file" onchange="this.form.submit()">
+        </label>
+      </form>
     </div>
 
-</div>
+  </div>
+</section>
+
+{% if original_img %}
+<section class="results">
+  <h2>Detection Results</h2>
+  <div class="image-container">
+    <div class="image-card">
+      <h3>Original</h3>
+      <img src="{{ original_img }}">
+    </div>
+    {% if plastic_img %}
+    <div class="image-card">
+      <h3>Plastic</h3>
+      <img src="{{ plastic_img }}">
+    </div>
+    {% endif %}
+    {% if oil_img %}
+    <div class="image-card">
+      <h3>Oil</h3>
+      <img src="{{ oil_img }}">
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endif %}
+
+<section class="health-section">
+  <h2>River Health Status</h2>
+  <button class="health-btn" onclick="checkHealth()">Check Health</button>
+  <h3 id="healthResult" class="health-result"></h3>
+</section>
+
+<script>
+  function startProcessing() {
+    document.getElementById("status").innerText = "Processing...";
+    fetch("/start_processing")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("status").innerText = "Done. Alerts: " + data.results.length;
+      });
+  }
+
+  function checkHealth() {
+    let result = document.getElementById("healthResult");
+    result.innerText = "Analyzing...";
+    result.style.color = "#0077b6";
+    fetch("/get_health")
+      .then(res => res.json())
+      .then(data => {
+        let health = data.health;
+        result.innerText = "River Health: " + health;
+        if (health.includes("GOOD"))          result.style.color = "#2a9d8f";
+        else if (health.includes("MODERATE")) result.style.color = "#f4a261";
+        else                                  result.style.color = "#e63946";
+      });
+  }
+</script>
+
+</body>
+</html>
