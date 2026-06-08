@@ -1,3 +1,11 @@
+# ----------------------------------------------------------------
+# Project: Water Pollution Detector using YOLOv8
+# Author: [Gopika G S] (KTU ID: [TRV23IT032])
+# Copyright: (c) 2026 [Gopika G S]. All Rights Reserved.
+# Description: Core object detection and image segmentation logic.
+# ----------------------------------------------------------------
+
+
 from flask import Flask, render_template, request, url_for
 from ultralytics import YOLO
 import os
@@ -276,3 +284,13 @@ def clean_up_static_folder():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
+
+
+
+# ----------------------------------------------------------------
+# Project: Water Pollution Detector using YOLOv8
+# Author: [Gopika G S] (KTU ID: [TRV23IT032])
+# Copyright: (c) 2026 [Gopika G S]. All Rights Reserved.
+# Description: Core object detection and image segmentation logic.
+# ----------------------------------------------------------------
+
