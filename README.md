@@ -1,6 +1,6 @@
 # Water_pollution_detection
 
-Copyright (c) 2026 [Gopika G S]. All Rights Reserved.
+Copyright (c) 2026 [Gopika G S, Vishnupriya, Hana]. All Rights Reserved.
 
 
 This software and all associated files are the sole intellectual property of the author. 
